@@ -34,6 +34,7 @@ clean:
 # Build for current platform
 build:
 	@echo "Building for current platform..."
+	mkdir -p $(BIN_DIR)
 	go build -o $(BIN_DIR)/$(APP_NAME) .
 	@echo "Build complete! Binary at $(BIN_DIR)/$(APP_NAME).exe"
 
@@ -67,6 +68,7 @@ build-mac:
 # Build for specific platform (usage: make build-target GOOS=linux GOARCH=amd64)
 build-target:
 	@echo "Building for $(GOOS)/$(GOARCH)..."
+	mkdir -p $(BIN_DIR)
 	GOOS=$(GOOS) GOARCH=$(GOARCH) go build -o $(BIN_DIR)/$(APP_NAME)-$(GOOS)-$(GOARCH)$(if $(filter windows,$(GOOS)),.exe,) ./
 
 # Run tests
