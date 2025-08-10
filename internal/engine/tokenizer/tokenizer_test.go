@@ -6,15 +6,49 @@ import (
 )
 
 func TestTokenizer(testingContext *testing.T) {
-	var input string = `=+(){},;`
+	var input string = `var five = 5;
+				var ten = 10;
+				var add = function(x, y) {
+				x + y;
+				};
+				var result = add(five, ten);
+			`
 	var testsTokens []expectedToken = []expectedToken{
+		{token.VAR, "var"},
+		{token.IDENTIFIER, "five"},
 		{token.ASSIGN, "="},
-		{token.PLUS, "+"},
+		{token.INT, "5"},
+		{token.SEMICOLON, ";"},
+		{token.VAR, "var"},
+		{token.IDENTIFIER, "ten"},
+		{token.ASSIGN, "="},
+		{token.INT, "10"},
+		{token.SEMICOLON, ";"},
+		{token.VAR, "var"},
+		{token.IDENTIFIER, "add"},
+		{token.ASSIGN, "="},
+		{token.FUNCTION, "function"},
 		{token.LPAREN, "("},
+		{token.IDENTIFIER, "x"},
+		{token.COMMA, ","},
+		{token.IDENTIFIER, "y"},
 		{token.RPAREN, ")"},
 		{token.LBRACE, "{"},
+		{token.IDENTIFIER, "x"},
+		{token.PLUS, "+"},
+		{token.IDENTIFIER, "y"},
+		{token.SEMICOLON, ";"},
 		{token.RBRACE, "}"},
+		{token.SEMICOLON, ";"},
+		{token.VAR, "var"},
+		{token.IDENTIFIER, "result"},
+		{token.ASSIGN, "="},
+		{token.IDENTIFIER, "add"},
+		{token.LPAREN, "("},
+		{token.IDENTIFIER, "five"},
 		{token.COMMA, ","},
+		{token.IDENTIFIER, "ten"},
+		{token.RPAREN, ")"},
 		{token.SEMICOLON, ";"},
 		{token.EOF, ""},
 	}
