@@ -1,37 +1,35 @@
 package tokenizer
 
 import (
+	"github.com/apastori/monkey-toto-interpreter-go/internal/domain/token"
 	"testing"
-	"github.com/apastori/monkey-toto-interpreter-go/token"
 )
 
-tests_tokens := []struct {
-expectedType token.TokenType
-expectedLiteral string
-}{
-{token.ASSIGN, "="},
-{token.PLUS, "+"},
-{token.LPAREN, "("},
-{token.RPAREN, ")"},
-{token.LBRACE, "{"},
-{token.RBRACE, "}"},
-{token.COMMA, ","},
-{token.SEMICOLON, ";"},
-{token.EOF, ""},
+func TestTokenizer(testingContext *testing.T) {
+	var input string = `=+(){},;`
+	var testsTokens []expectedToken = []expectedToken{
+		{token.ASSIGN, "="},
+		{token.PLUS, "+"},
+		{token.LPAREN, "("},
+		{token.RPAREN, ")"},
+		{token.LBRACE, "{"},
+		{token.RBRACE, "}"},
+		{token.COMMA, ","},
+		{token.SEMICOLON, ";"},
+		{token.EOF, ""},
+	}
+	var newTokenizer *Tokenizer = NewTokenizer(input)
+	var index int
+	var testToken expectedToken
+	for index, testToken = range testsTokens {
+		var nextToken token.Token = newTokenizer.NextToken()
+		if nextToken.Type != testToken.expectedType {
+			testingContext.Fatalf("tests[%d] - token_type wrong. expected=%q, got=%q",
+				index, testToken.expectedType, nextToken.Type)
+		}
+		if nextToken.Literal != testToken.expectedLiteral {
+			testingContext.Fatalf("tests[%d] - literal wrong. expected=%q, got=%q",
+				index, testToken.expectedLiteral, nextToken.Literal)
+		}
+	}
 }
-
-new_tokenizer := New(input)
-for index, test_token := range tests {
-token := new_tokenizer.NextToken()
-if token.Type != test_token.expectedType {
-t.Fatalf("tests[%d] - token_type wrong. expected=%q, got=%q",
-i, test_token.expectedType, token.Type)
-}
-if token.Literal != test_token.expectedLiteral {
-test_token.Fatalf("tests[%d] - literal wrong. expected=%q, got=%q",
-i, test_token.expectedLiteral, token.Literal)
-}
-}
-
-
-
