@@ -5,5 +5,5 @@ var ArithmeticMap = map[byte]TokenType{
 	'-': MINUS,
 	'*': MULTIPLY,
 	'/': DIVIDE,
-	'%': MODULO,	
+	'%': MODULO,
 }

@@ -62,11 +62,11 @@ func (tokenizer *Tokenizer) NextToken() token.Token {
 		newToken.Type = token.INT
 		return newToken
 	}
+	// If we reach here, it means we have an illegal character
+	newToken.Literal = string(tokenizer.currentChar)
+	newToken.Type = token.ILLEGAL
 	// advances to next character
 	tokenizer.readChar()
 	// Default case: return ILLEGAL token
-	return token.Token{
-		Type:    token.ILLEGAL,
-		Literal: string(tokenizer.currentChar),
-	}
+	return newToken
 }
