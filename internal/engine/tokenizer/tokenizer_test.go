@@ -8,7 +8,7 @@ import (
 func TestTokenizer(testingContext *testing.T) {
 	var input string = `var five = 5;
 				var ten = 10;
-				var add = function(x, y) {
+				var add = func(x, y) {
 				x + y;
 				};
 				var result = add(five, ten);
@@ -27,7 +27,7 @@ func TestTokenizer(testingContext *testing.T) {
 		{token.VAR, "var"},
 		{token.IDENTIFIER, "add"},
 		{token.ASSIGN, "="},
-		{token.FUNCTION, "function"},
+		{token.FUNCTION, "func"},
 		{token.LPAREN, "("},
 		{token.IDENTIFIER, "x"},
 		{token.COMMA, ","},

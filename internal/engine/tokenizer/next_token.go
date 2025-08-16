@@ -18,13 +18,37 @@ func (tokenizer *Tokenizer) NextToken() token.Token {
 			Literal: "",
 		}
 	}
-	// check punctuation with PunctuationLookup
+	// check punctuation or delimiters with PunctuationLookup
 	tokenPunctuationPtr := token.PunctuationLookup(tokenizer.currentChar)
 	if tokenPunctuationPtr != nil {
 		// advances to next character
 		tokenizer.readChar()
 		// dereference pointer, return just the value
 		return *tokenPunctuationPtr
+	}
+	// check assignment "=" with AssignmentLookup
+	tokenAssignmentPtr := token.AssignmentLookup(tokenizer.currentChar)
+	if tokenAssignmentPtr != nil {
+		// advances to next character
+		tokenizer.readChar()
+		// dereference pointer, return just the value
+		return *tokenAssignmentPtr
+	}
+	// check arithmetic operations + - * / % with ArithmeticLookup
+	tokenArithmeticPtr := token.ArithmeticLookup(tokenizer.currentChar)
+	if tokenArithmeticPtr != nil {
+		// advances to next character
+		tokenizer.readChar()
+		// dereference pointer, return just the value
+		return *tokenArithmeticPtr
+	}
+	// check comparisons > < with ComparisonOneCharLookup
+	tokenComparisonOneCharPtr := token.ComparisonOneCharLookup(tokenizer.currentChar)
+	if tokenComparisonOneCharPtr != nil {
+		// advances to next character
+		tokenizer.readChar()
+		// dereference pointer, return just the value
+		return *tokenComparisonOneCharPtr
 	}
 	// read keywords or identifier
 	if utils.IsAlphabeticOrUnderscore(tokenizer.currentChar) {
