@@ -18,6 +18,22 @@ func (tokenizer *Tokenizer) NextToken() token.Token {
 			Literal: "",
 		}
 	}
+	// Check for two-character tokens first (Comparators, Logical Operators)
+	if isTwoCharCandidate(tokenizer.currentChar) {
+		// Check for two-character tokens with TwoCharLookup
+		if tok := tokenizer.readTwoCharOperator(); tok != nil {
+			return *tok
+		}
+	}
+	// Check for one-char logical operators
+	if token.IsLogicalOneChar(tokenizer.currentChar) {
+		// Check logical operators with LogicalOneCharLookup
+		tokenizer.readChar()
+		return token.Token{
+			Type:    token.NOT,
+			Literal: "!",
+		}
+	}
 	// check punctuation or delimiters with PunctuationLookup
 	tokenPunctuationPtr := token.PunctuationLookup(tokenizer.currentChar)
 	if tokenPunctuationPtr != nil {
@@ -42,7 +58,7 @@ func (tokenizer *Tokenizer) NextToken() token.Token {
 		// dereference pointer, return just the value
 		return *tokenArithmeticPtr
 	}
-	// check comparisons > < with ComparisonOneCharLookup
+	// check one-char comparisons > < with ComparisonOneCharLookup
 	tokenComparisonOneCharPtr := token.ComparisonOneCharLookup(tokenizer.currentChar)
 	if tokenComparisonOneCharPtr != nil {
 		// advances to next character
@@ -56,7 +72,7 @@ func (tokenizer *Tokenizer) NextToken() token.Token {
 		newToken.Type = token.IdentifierLookup(newToken.Literal)
 		return newToken
 	}
-	// read NUMBERS
+	// read Numbers
 	if utils.IsDigit(tokenizer.currentChar) {
 		newToken.Literal = tokenizer.readNumber()
 		newToken.Type = token.INT

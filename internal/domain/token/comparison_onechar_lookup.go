@@ -5,7 +5,7 @@ func ComparisonOneCharLookup(ch byte) *Token {
 	var exists bool
 	var tokenPtr *Token
 	// Checking punctuation
-	if tokenTypeMap, exists = CompartorOneCharMap[ch]; exists {
+	if tokenTypeMap, exists = ComparatorOneCharMap[ch]; exists {
 		tokenFound := newToken(tokenTypeMap, ch)
 		tokenPtr = &tokenFound
 		return tokenPtr

@@ -1,6 +1,6 @@
 package token
 
-var CompartorTwoCharMap = map[string]TokenType{
+var ComparatorTwoCharMap = map[string]TokenType{
 	"==": EQUAL,
 	">=": GREATER_THAN_OR_EQUAL,
 	"<=": LESS_THAN_OR_EQUAL,

@@ -7,12 +7,22 @@ import (
 
 func TestTokenizer(testingContext *testing.T) {
 	var input string = `var five = 5;
-				var ten = 10;
-				var add = func(x, y) {
-				x + y;
-				};
-				var result = add(five, ten);
-			`
+		var ten = 10;
+		var add = func(x, y) {
+			x + y;
+		};
+		var result = add(five, ten);
+		!-/*5;
+		5 < 10 > 5;
+		if (5 < 10) {
+			return true;
+		} else {
+			return false;
+		}
+		10 == 10;
+		10 != 9;
+		8 <> 9;
+		`
 	var testsTokens []expectedToken = []expectedToken{
 		{token.VAR, "var"},
 		{token.IDENTIFIER, "five"},
@@ -50,6 +60,48 @@ func TestTokenizer(testingContext *testing.T) {
 		{token.IDENTIFIER, "ten"},
 		{token.RPAREN, ")"},
 		{token.SEMICOLON, ";"},
+		{token.NOT, "!"},
+		{token.MINUS, "-"},
+		{token.DIVIDE, "/"},
+		{token.MULTIPLY, "*"},
+		{token.INT, "5"},
+		{token.SEMICOLON, ";"},
+		{token.INT, "5"},
+		{token.LESS_THAN, "<"},
+		{token.INT, "10"},
+		{token.GREATER_THAN, ">"},
+		{token.INT, "5"},
+		{token.SEMICOLON, ";"},
+		{token.IF, "if"},
+		{token.LPAREN, "("},
+		{token.INT, "5"},
+		{token.LESS_THAN, "<"},
+		{token.INT, "10"},
+		{token.RPAREN, ")"},
+		{token.LBRACE, "{"},
+		{token.RETURN, "return"},
+		{token.TRUE, "true"},
+		{token.SEMICOLON, ";"},
+		{token.RBRACE, "}"},
+		{token.ELSE, "else"},
+		{token.LBRACE, "{"},
+		{token.RETURN, "return"},
+		{token.FALSE, "false"},
+		{token.SEMICOLON, ";"},
+		{token.RBRACE, "}"},
+		{token.INT, "10"},
+		{token.EQUAL, "=="},
+		{token.INT, "10"},
+		{token.SEMICOLON, ";"},
+		{token.INT, "10"},
+		{token.NOT_EQUAL, "!="},
+		{token.INT, "9"},
+		{token.SEMICOLON, ";"},
+		{token.INT, "8"},
+		{token.NOT_EQUAL_2, "<>"},
+		{token.INT, "9"},
+		{token.SEMICOLON, ";"},
+		// EOF token
 		{token.EOF, ""},
 	}
 	var newTokenizer *Tokenizer = NewTokenizer(input)
