@@ -79,7 +79,7 @@ test:
 # Run the application
 run:
 	@echo "Running application..."
-	go run ./
+	go run ./cmd/monkeytoto
 
 # Format, test, and build
 all: format test build

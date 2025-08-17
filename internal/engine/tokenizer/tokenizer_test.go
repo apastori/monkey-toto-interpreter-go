@@ -1,8 +1,9 @@
 package tokenizer
 
 import (
-	"github.com/apastori/monkey-toto-interpreter-go/internal/domain/token"
 	"testing"
+
+	"github.com/apastori/monkey-toto-interpreter-go/internal/domain/token"
 )
 
 func TestTokenizer(testingContext *testing.T) {
