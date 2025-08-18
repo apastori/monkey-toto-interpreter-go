@@ -2,9 +2,9 @@ package token
 
 const (
 	// Arithmetic operators
-	PLUS     TokenType = "+"
-	MINUS    TokenType = "-"
-	MULTIPLY TokenType = "*"
-	DIVIDE   TokenType = "/"
-	MODULO   TokenType = "%"
+	PLUS     TokenType = "PLUS"
+	MINUS    TokenType = "MINUS"
+	MULTIPLY TokenType = "MULTIPLY"
+	DIVIDE   TokenType = "DIVIDE"
+	MODULO   TokenType = "MODULO"
 )

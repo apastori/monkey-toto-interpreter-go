@@ -5,5 +5,5 @@ var ComparatorTwoCharMap = map[string]TokenType{
 	">=": GREATER_THAN_OR_EQUAL,
 	"<=": LESS_THAN_OR_EQUAL,
 	"!=": NOT_EQUAL,
-	"<>": NOT_EQUAL_2,
+	"<>": NOT_EQUAL,
 }

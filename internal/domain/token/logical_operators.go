@@ -2,7 +2,7 @@ package token
 
 const (
 	// Logical operators
-	AND TokenType = "&&"
-	OR  TokenType = "||"
-	NOT TokenType = "!"
+	AND TokenType = "AND"
+	OR  TokenType = "OR"
+	NOT TokenType = "NOT"
 )

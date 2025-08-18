@@ -1,13 +1,13 @@
 package token
 
 var PunctuationMap = map[byte]TokenType{
-	';': SEMICOLON,
-	'(': LPAREN,
-	')': RPAREN,
+	';': SEMI_COLON,
+	'(': L_PAREN,
+	')': R_PAREN,
 	',': COMMA,
-	'{': LBRACE,
-	'}': RBRACE,
-	']': RBRACKET,
-	'[': LBRACKET,
+	'{': L_BRACE,
+	'}': R_BRACE,
+	']': R_BRACKET,
+	'[': L_BRACKET,
 	':': COLON,
 }
